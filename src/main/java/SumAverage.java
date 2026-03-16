@@ -14,12 +14,13 @@ public class SumAverage {
      *   arr = {-4, 10, -6}     →  returns 0
      */
     public int sum(int[] arr) {
-        // TODO: initialize an accumulator variable to 0
+        int sum = 0;
 
-        // TODO: loop through arr, adding each element to the accumulator
+        for (int i : arr) {
+            sum += i;
+        }
 
-        // TODO: return the accumulator
-        return 0; // placeholder
+        return sum;
     }
 
     /**
@@ -38,11 +39,6 @@ public class SumAverage {
      *   arr = {-4, 10, -6}     →  returns 0   (0 / 3 = 0)
      */
     public int average(int[] arr) {
-        // TODO: compute the sum of all elements (you may call sum(arr) or loop again)
-
-        // TODO: divide the sum by arr.length (integer division — no cast needed)
-
-        // TODO: return the result
-        return 0; // placeholder
+        return sum(arr) / arr.length;
     }
 }
