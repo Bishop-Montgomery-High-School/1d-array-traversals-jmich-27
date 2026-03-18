@@ -1,33 +1,38 @@
-name: Autograding
-
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
 permissions:
   checks: write
   actions: read
   contents: read
-
 jobs:
-  grade:
-    name: Autograding
+  run-autograding-tests:
     runs-on: ubuntu-latest
-
+    if: github.actor != 'github-classroom[bot]'
     steps:
-      - name: Checkout student repository
-        uses: actions/checkout@v4
-
-      - name: Set up Java 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'temurin'
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Run autograder
-        uses: education/autograding@v1
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: MinMax — max()
+      id: minmax-max
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: MinMax — max()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.minMax_max_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: MinMax — max()
+      id: minmax-max
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: MinMax — max()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.minMax_max_basicCases"
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        MINMAX-MAX_RESULTS: "${{steps.minmax-max.outputs.result}}"
+      with:
+        runners: minmax-max,minmax-max
