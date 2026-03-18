@@ -17,13 +17,15 @@ public class IndexFinder {
      *   arr = {2, 9, 2, 5}     →  returns 0  (first occurrence of 2)
      */
     public int indexOfMin(int[] arr) {
-        // TODO: initialize a variable to track the index of the minimum (start at 0)
+        int minIdx = 0;
 
-        // TODO: loop from index 1 to arr.length - 1
-        //       if arr[i] is strictly less than arr[your tracked index], update your tracked index
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < arr[minIdx]) {
+                minIdx = i;
+            }
+        }
 
-        // TODO: return the tracked index
-        return 0; // placeholder
+        return minIdx;
     }
 
     /**
@@ -41,12 +43,14 @@ public class IndexFinder {
      *   arr = {9, 2, 9, 5}     →  returns 0  (first occurrence of 9)
      */
     public int indexOfMax(int[] arr) {
-        // TODO: initialize a variable to track the index of the maximum (start at 0)
+        int maxIdx = 0;
 
-        // TODO: loop from index 1 to arr.length - 1
-        //       if arr[i] is strictly greater than arr[your tracked index], update your tracked index
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[maxIdx]) {
+                maxIdx = i;
+            }
+        }
 
-        // TODO: return the tracked index
-        return 0; // placeholder
+        return maxIdx;
     }
 }

@@ -1,33 +1,188 @@
-name: Autograding
-
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
 permissions:
   checks: write
   actions: read
   contents: read
-
 jobs:
-  grade:
-    name: Autograding
+  run-autograding-tests:
     runs-on: ubuntu-latest
-
+    if: github.actor != 'github-classroom[bot]'
     steps:
-      - name: Checkout student repository
-        uses: actions/checkout@v4
-
-      - name: Set up Java 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'temurin'
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Run autograder
-        uses: education/autograding@v1
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: MinMax — min()
+      id: minmax-min
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: MinMax — min()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.minMax_min_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: MinMax — max()
+      id: minmax-max
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: MinMax — max()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.minMax_max_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: IndexFinder — indexOfMin()
+      id: indexfinder-indexofmin
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: IndexFinder — indexOfMin()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.indexFinder_indexOfMin_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: IndexFinder — indexOfMax()
+      id: indexfinder-indexofmax
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: IndexFinder — indexOfMax()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.indexFinder_indexOfMax_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: SumAverage — sum()
+      id: sumaverage-sum
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: SumAverage — sum()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.sumAverage_sum_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: SumAverage — average()
+      id: sumaverage-average
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: SumAverage — average()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.sumAverage_average_basicCases"
+        timeout: 10
+    - name: Counter — countAbove()
+      id: counter-countabove
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Counter — countAbove()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.counter_countAbove_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: Counter — countBelow()
+      id: counter-countbelow
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Counter — countBelow()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.counter_countBelow_basicCases"
+        timeout: 10
+    - name: Counter — countEqual()
+      id: counter-countequal
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Counter — countEqual()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.counter_countEqual_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: PropertyChecker — hasPositive()
+      id: propertychecker-haspositive
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: PropertyChecker — hasPositive()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.propertyChecker_hasPositive_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: PropertyChecker — allPositive()
+      id: propertychecker-allpositive
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: PropertyChecker — allPositive()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.propertyChecker_allPositive_basicCases"
+        timeout: 10
+        max-score: 1
+    - name: DuplicateDetector — hasDuplicate()
+      id: duplicatedetector-hasduplicate
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: DuplicateDetector — hasDuplicate()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.duplicateDetector_hasDuplicate_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Shifter — shiftLeft()
+      id: shifter-shiftleft
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Shifter — shiftLeft()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.shifter_shiftLeft_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Shifter — shiftRight()
+      id: shifter-shiftright
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Shifter — shiftRight()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.shifter_shiftRight_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Rotator — rotateLeft()
+      id: rotator-rotateleft
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Rotator — rotateLeft()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.rotator_rotateLeft_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Rotator — rotateRight()
+      id: rotator-rotateright
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Rotator — rotateRight()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.rotator_rotateRight_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Reverser — reverse()
+      id: reverser-reverse
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Reverser — reverse()
+        setup-command: ''
+        command: "./gradlew test --tests ArrayTraversalsTest.reverser_reverse_basicCases"
+        timeout: 10
+        max-score: 2
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        MINMAX-MIN_RESULTS: "${{steps.minmax-min.outputs.result}}"
+        MINMAX-MAX_RESULTS: "${{steps.minmax-max.outputs.result}}"
+        INDEXFINDER-INDEXOFMIN_RESULTS: "${{steps.indexfinder-indexofmin.outputs.result}}"
+        INDEXFINDER-INDEXOFMAX_RESULTS: "${{steps.indexfinder-indexofmax.outputs.result}}"
+        SUMAVERAGE-SUM_RESULTS: "${{steps.sumaverage-sum.outputs.result}}"
+        SUMAVERAGE-AVERAGE_RESULTS: "${{steps.sumaverage-average.outputs.result}}"
+        COUNTER-COUNTABOVE_RESULTS: "${{steps.counter-countabove.outputs.result}}"
+        COUNTER-COUNTBELOW_RESULTS: "${{steps.counter-countbelow.outputs.result}}"
+        COUNTER-COUNTEQUAL_RESULTS: "${{steps.counter-countequal.outputs.result}}"
+        PROPERTYCHECKER-HASPOSITIVE_RESULTS: "${{steps.propertychecker-haspositive.outputs.result}}"
+        PROPERTYCHECKER-ALLPOSITIVE_RESULTS: "${{steps.propertychecker-allpositive.outputs.result}}"
+        DUPLICATEDETECTOR-HASDUPLICATE_RESULTS: "${{steps.duplicatedetector-hasduplicate.outputs.result}}"
+        SHIFTER-SHIFTLEFT_RESULTS: "${{steps.shifter-shiftleft.outputs.result}}"
+        SHIFTER-SHIFTRIGHT_RESULTS: "${{steps.shifter-shiftright.outputs.result}}"
+        ROTATOR-ROTATELEFT_RESULTS: "${{steps.rotator-rotateleft.outputs.result}}"
+        ROTATOR-ROTATERIGHT_RESULTS: "${{steps.rotator-rotateright.outputs.result}}"
+        REVERSER-REVERSE_RESULTS: "${{steps.reverser-reverse.outputs.result}}"
+      with:
+        runners: minmax-min,minmax-max,indexfinder-indexofmin,indexfinder-indexofmax,sumaverage-sum,sumaverage-average,counter-countabove,counter-countbelow,counter-countequal,propertychecker-haspositive,propertychecker-allpositive,duplicatedetector-hasduplicate,shifter-shiftleft,shifter-shiftright,rotator-rotateleft,rotator-rotateright,reverser-reverse
